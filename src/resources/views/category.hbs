@@ -1,0 +1,23 @@
+<!-- category.hbs -->
+
+<div class="product-shop"> 
+    <div class="product-list">PRODUCT LIST</div>
+      <div class="product-box">
+        {{#each products}}
+          <div class="product-card">
+            <div class="product-image">
+              <img src="{{this.image}}" alt="">
+            </div>
+            <div class="product-title">
+              <h4 class="product-name">{{this.name}}</h4>  
+              <p class="product-description">{{this.description}}</p> 
+              <p class="product-price">{{this.price}}</p>
+            
+            </div>
+            <form action="/cart/add/{{_id}}" method="POST">
+              <button type="submit">Mua ngay</button>
+            </form> 
+          </div>
+        {{/each}} 
+      </div>
+  </div>

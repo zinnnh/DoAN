@@ -1,0 +1,21 @@
+<!-- views/products/index.hbs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+</head>
+<body>
+    <h1>List of Products in Category "{{category}}"</h1>
+    <ul>
+        {{#each products}}
+            <li>
+                <h2>{{this.name}}</h2>
+                <p>{{this.description}}</p>
+                <p>Price: {{this.price}}$</p>
+            </li>
+        {{/each}}
+    </ul>
+</body>
+</html>

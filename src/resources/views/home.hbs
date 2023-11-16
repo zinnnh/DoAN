@@ -1,0 +1,51 @@
+
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="Tìm kiếm sản phẩm...">
+    <button onclick="searchProducts()">Tìm kiếm</button>
+  </div>
+
+{{!-- SHOP  --}}
+  
+  <div class="product-shop"> 
+    <div class="product-list">
+      <p>DANH MUC SAN PHAM</p>
+      <ul>
+          <li><a href="javascript:void(0)" onclick="filterByCategory('ly')">Ly Giấy</a></li>
+          <li><a href="javascript:void(0)" onclick="filterByCategory('to')">Tô Giấy</a></li>
+          <li><a href="javascript:void(0)" onclick="filterByCategory('dia')">Đĩa Giấy</a></li>
+      </ul>
+    </div>
+
+    </div>
+      <div class="product-box">
+        {{#each products}}
+          <div class="product-card">
+            <div class="product-image">
+              <img src="{{this.image}}" alt="">
+            </div>
+            <div class="product-title">
+              <h4 class="product-name">{{this.name}}</h4>  
+              <p class="product-description">{{this.description}}</p>
+              <p class="product-price">{{this.price}}$</p>
+            
+            </div>
+            <form action="/cart/add/{{_id}}" method="POST">
+              <button type="submit">Mua ngay</button>
+            </form> 
+          </div>
+        {{/each}} 
+      </div>
+  </div>
+
+ 
+<script>
+  function searchProducts() {
+    const searchTerm = document.getElementById('searchInput').value;
+    window.location.href = `/search?query=${searchTerm}`;
+  }
+
+    function filterByCategory(category) {
+        window.location.href = `/category/${category}`;
+    }
+</script>
+

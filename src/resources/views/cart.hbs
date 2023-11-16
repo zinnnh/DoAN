@@ -1,0 +1,84 @@
+  <!-- views/cart.hbs -->
+  <div class="header-cart">
+    <h1 class="sub-cart"><span> Shopping Cart</span></h1>
+    <div class="heading-cart">
+      <h1 class="my-cart">My Cart</h1>
+      <a href="/" class="continue">Continue Shopping</a>
+    </div>
+  </div>
+
+  <div class="product-total">
+  {{#if cartItems.length}}
+    <table >
+      <thead
+        <tr>
+          <th>Product</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Image</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each cartItems}}
+          <tr>
+            <td>{{this.productId.name}}</td>
+            <td>{{this.productId.price}}$</td>
+            <td>
+              <form class="update-quantity" id="updateForm{{this._id}}" action="/cart/update/{{this._id}}" method="POST">
+                <label for="quantity"></label>
+                <input type="number" id="quantity" name="quantity" min="1" max="10" value="{{this.quantity}}" onchange="autoSubmitForm('updateForm{{this._id}}')">
+              </form>
+            </td>
+            <td><img class="cart-image" src="{{this.productId.image}}" alt=""></td>
+            <td>
+              <form class="remove" action="/cart/remove/{{this._id}}" method="POST">
+                <button type="submit">Remove</button>
+              </form>
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+
+      <div class="totals">
+
+        <div class="totals-item">
+          <label class="totals-label" >Subtotal:</label>
+          <div class="totals-value" id="cart-subtotal">{{subtotal}}$</div>  
+        </div>
+
+        <div class="totals-item">
+          <label class="totals-label">Tax(10%):</label>
+          <div class="totals-value" id="cart-tax">{{ tax}}$</div>  
+        </div>
+
+        <div class="totals-item">
+          <label class="totals-label">Shipping:</label>
+          <div class="totals-value" id="cart-shipping">{{ shipping}}$</div>  
+        </div>
+
+        <div class="totals-item totals-item-total">
+          <label class="totals-label">Grand Total:</label>
+          <div class="totals-value" id="cart-total">{{ total}}$</div>  
+        </div>
+        
+        </div>
+    
+    <form class="checkout-form" action="/cart/checkout" method="GET">
+    <button type="submit" class="checkout">Checkout</button> 
+    </form>
+
+  {{else}}  
+    <p>Your shopping cart is empty.</p>
+    <a href="/">Return</a>
+
+  {{/if}}
+  </div>
+
+  <script>
+      // Function to automatically submit the form when the input field changes
+      function autoSubmitForm(formId) {
+          document.getElementById(formId).submit();
+      }
+  </script>
